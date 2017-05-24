@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>b̶e̶s̶t̶ Online Marathon Pace Chart</title>
+    
+    <link rel="shortcut icon" href="http://i.imgur.com/yoyhoiz.png">
+      
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+  
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
+
+    <!-- DataTables -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/css/jquery.dataTables.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/css/dataTables.material.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/scroller/1.4.2/css/scroller.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css" rel="stylesheet"/>
+    
+    <!-- custom -->
+    <link rel="stylesheet" href="style.css" />
+    
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking -->
+      <svg version="1.1" 
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="50" height="50" viewbox="0 0 200 200">
+          <defs>
+          <style type="text/css"><![CDATA[
+             svg line,
+             svg polyline {
+                stroke: black;
+                fill: none;
+                stroke-width: 15;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+              }
+          ]]></style>
+        </defs>
+        
+        <line x1="109" y1="45" x2="100" y2="108" id="torso" />
+        
+        <polyline points="109 45 71 60 76 91" id="right-arm"/>
+        <polyline points="109 45 150 38 141 70" id="left-arm"/>
+        <polyline points="100 108 79 152 45 168" id="right-leg"/>
+        <polyline points="100 108 141 146 138 178" id="left-leg"/>
+      
+        <circle cx="115" cy="19" r="15" fill="black" id="face" />
+        <circle cx="144" cy="58" r="8" fill="red" id="watch" />
+              
+      </svg>
+      <span class="h1"><del>Best</del> Online Marathon Pace Chart</span>  
+      <div class="clear"></div>
+    
+      <!-- Settings -->
+      <div class="panel panel-default">
+        <div class="panel-heading">Calculator</div>
+        <div class="panel-body">
+          <div class="row">
+            
+            <div class="col-xs-4">
+              <div class="inputs">
+                <div class="form-group label-floating">
+                  <label for="pace_min" class="control-label">Pace (minute/mile)</label>
+                  <input type="text" class="form-control" id="pace_min" value="10:00">
+                   <span class="help-block">mm:ss format</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="inputs">
+                <div class="form-group label-floating">
+                  <label for="split_delta" class="control-label">Total Time</label>
+                  <input type="text" class="form-control" id="total_time" value="4:22:00">
+                  <span class="help-block">h:mm:ss format</span>
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn-raised btn-primary" id="bq-btn"
+                    data-toggle="modal" data-target="#bq-modal">BQ</button>
+
+            
+          </div>
+        </div>
+      </div>
+    
+      <!-- Pacing Stategy -->
+      <div class="panel panel-info">
+        <!-- remove class 'collapsed' to default open -->
+        <div class="panel-heading collapsible collapsed" 
+             data-toggle="collapse" 
+             data-target="#pacing-panel-body">
+          Pacing Stategy
+        </div>
+        <!-- add class 'in' to default open -->
+        <div class="panel-body collapse" id="pacing-panel-body">
+          <div class="pacingSplits">
+            <div style="float:left">
+              <b>Max</b>:
+              <span id="slider-value-max">12:00</span>
+            </div>
+            <!-- <div>
+              <b>Start</b>:<br/>
+              <span id="slider-value-start">10:00</span>
+            </div> -->
+            <!-- <div>
+              <b>Avg</b>:
+              <span id="slider-value-avg">10:00</span>
+            </div> -->
+            <!-- <div>
+              <b>End</b>:<br/>
+              <span id="slider-value-end">9:50</span>
+            </div> -->
+            <div style="float:right">
+              <b>Min</b>:
+              <span id="slider-value-min">8:00</span>
+            </div>            
+
+          </div>
+          <div class="clear"></div>
+          
+          <div class="slider" id="slider"></div>
+          
+          <div id="container-1" class="chart"></div>
+          <div id="container-2" class="chart"></div>
+          <div id="container-3" class="chart"></div>
+          
+          <div class="clear"></div>
+        </div>
+      </div>
+      
+      <!-- Pace Chart -->
+      <div class="panel panel-info">
+        <div class="panel-heading collapsible " 
+             data-toggle="collapse" 
+             data-target="#chart-panel-body">
+          Pace Table
+        </div>
+        <div class="panel-body collapse in" id="chart-panel-body">
+          <!-- Table -->
+          <div id="placeholder"></div>
+          <!-- <table class="hover mdl-data-table" id="placeholder"></table> -->  
+        </div>
+        
+      </div>
+      
+
+      <!-- BQ -->
+      <div class="modal" id="bq-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">Boston Qualifying Time</h4>
+            </div>
+            <div class="modal-body">
+              
+              <div class="form-group label-floating">
+                <label for="bq_aqe" class="control-label">Age</label>
+                <input type="text" class="form-control" id="bq_aqe" value="">
+              </div>
+              
+              <div class="form-group">
+                <label class="control-label">Sex</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="sex" value="F" id="sex_f">
+                    Female
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="sex" value="M" id="sex_m" >
+                    Male
+                  </label>
+                </div>
+
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success btn-raised" id="bq-save">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- Bootstrap Material Design -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.js"></script>
+    
+    <!-- No UI Slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.js"></script>
+    
+    <!-- DataTables -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/dataTables.material.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/scroller/1.4.2/js/dataTables.scroller.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js"></script>
+    
+    <!-- HighCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    
+    <!-- Custom -->
+    <script src="DateMath.js"></script>
+    <script src="PaceData.js"></script>
+    <script src="PaceStrategy.js"></script>
+    <script src="PaceTable.js"></script>
+    <script src="script.js"></script>
+    
+    
+  </body>
+
+</html>

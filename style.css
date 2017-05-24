@@ -1,0 +1,151 @@
+/* entire page */
+body {
+    background-color: #f7f7f7;
+}
+.container {
+  padding: 10px;
+  width:100%;
+}
+
+svg, .title {
+  float:left;
+}
+.title h1 {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.clear {
+  clear:both;
+}
+
+#bq-btn{
+  margin:20px;
+}
+
+/* slider - rtl fix */
+.noUi-origin {
+    left: initial;
+    right: initial;
+}
+.noUi-handle {
+    left: 0;
+}
+
+/* slider - rtl fix */
+.noUi-tooltip {
+    margin-top: -20px;
+    margin-left: -15px;
+}
+.pacingSplits {
+  text-align: center;
+}
+.pacingSplits > div {
+  /*
+  margin-left: 5%;
+  margin-right: 5%;
+  */
+  display: inline-block;
+}
+/* charts */
+.chart {
+  width: 29%; 
+  margin-left:2%;
+  margin-right:2%;
+  height: 200px; 
+  float: left;
+}
+.highcharts-credits {
+  display:none;
+}
+
+#chart-panel-body {
+  padding: 0;
+}
+
+/* table */
+#placeholder table {
+  
+  border-collapse: collapse;
+}
+
+#placeholder table td,
+#placeholder table th {
+  text-align: center;
+  white-space: nowrap;
+  padding: 0px 4px ;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+    white-space: nowrap;
+}
+
+/* first row */
+#placeholder table th {
+  background: #c9dcce;
+  font-weight: bold;
+  margin-top: .2em;
+  margin-bottom: .2em;
+}
+
+
+/* first column */
+#placeholder table tbody tr td:first-child,
+#placeholder table thead tr th:first-child{
+  background-color: #d5d8f1;  
+}
+
+/* every other row */
+table tbody tr:nth-child(even)  { 
+  background-color: #f2f2f2;  
+}
+
+/* fixed header buggy when resizing */
+.fixedHeader-floating {
+  display: none;
+}
+
+
+/* DataTables */
+/* https://datatables.net/examples/api/highlight.html */
+#placeholder .highlight {
+    background-color: #f4f7c2 ;
+}
+#placeholder table.dataTable.hover tbody tr:hover,
+#placeholder table.dataTable.display tbody tr:hover {
+    background-color: #f4f7c2;
+}
+
+/* selected + highlight/hover */
+#placeholder table.dataTable tbody tr.selected:hover {
+  background-color: #bbc778 ; /* #f4f7c2 + #B0BED9*/
+}
+
+/* panels */
+/* https://stackoverflow.com/a/24897353/1366033 */
+.panel-heading.collapsible:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading.collapsible.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
+
+
+
+.panel.panel-info .panel-heading.collapsible {
+  transition: all 1s ease;
+  /* https://stackoverflow.com/a/3088012/1366033 */
+  cursor: pointer; 
+  cursor: hand;
+  background-color: #03a9f4;
+}
+.panel.panel-info .panel-heading.collapsible.collapsed {
+  background-color: #eee;
+  color: rgba(0,0,0, 0.87);
+}
