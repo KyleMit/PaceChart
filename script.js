@@ -48,7 +48,7 @@ $(document).ready(function() {
       
       
       
-      //merely setting val won't trigger change
+      //merely setting val - won't trigger change
       $("#total_time").val(total_timespan)
 
       
@@ -76,7 +76,7 @@ $(document).ready(function() {
         $(this).closest('.form-group').removeClass('has-warning')
       }
   
-
+      //merely setting val - won't trigger change
       $("#pace_min").val(pace_span)
 
       

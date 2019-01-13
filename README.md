@@ -1,44 +1,50 @@
-# Marathon Pace Chart
-adapted from [marathonpacechart](http://marathonpacechart.com/)
+# b̶e̶s̶t̶ Online Marathon Pace Chart
 
-### ToDo
-* timespan input picker (hint for now)
-* knockout js - bind input to total finish time
-  * might keep simple jQuery for two way binding events
-* checkbox settings toggle - cog on top
-  * metric/imperial
-  * show mile splits
+Pace calculator for marathon running times
+
+Avaialble at: [https://kylemit.github.io/PaceChart/index.html](https://kylemit.github.io/PaceChart/index.html)
+
+Adapted from [Marathon Pace Chart](http://marathonpacechart.com/)
+
+## Feature Backlog
+
+- [ ] timespan input picker (hint for now)
+- [ ] knockout js - bind input to total finish time (might keep simple jQuery for two way binding events)
+- [ ] checkbox settings toggle - cog on top
+  - [ ] metric/imperial
+  - [ ] show mile splits
 
 
-* enable offline mode
-  * remember settings in local storage
-  * shareable links
+- [ ] enable offline mode
+- [ ] remember settings in local storage
+- [ ] shareable links
 
-* datatable
-  * fix table headers
-  * fix first column
-  * Bugs
-    * header misaligned until readadjusted
-    * header frozen to top of page
+- **Datatable**
+- [ ] fix table headers
+- [ ] fix first column
+* **Bugs**
+    - [ ] header misaligned until readadjusted
+    - [ ] header frozen to top of page
 
 * update strategy charts when data changes
 * update table when data changes
 
-* two decision points
-  * min/mile -> pace chart
-  * min/mile -> pace grid
+- **two decision points**:
+  - [ ] min/mile -> pace chart
+  - [ ] min/mile -> pace grid
 
-* Boston qualifying time
+- [x] Boston qualifying time
 
-* Pacing Strategy
-  * better labels
-  * average time
-  * radio button to control state
+- [ ] Pacing Strategy
+  - [ ] better labels
+  - [ ] average time
+  - [ ] radio button to control state
   
-* icon and favicon (svg/png) - runner checking watch
+- [x] icon and favicon (svg/png) - runner checking watch
 
 
-### Libraries
+## Libraries
+
 * [jquery](https://cdnjs.com/libraries/jquery/2.2.4)
 * [bootstrap](https://cdnjs.com/libraries/twitter-bootstrap/3.3.7)
 * [bootstrap-material-design](https://cdnjs.com/libraries/bootstrap-material-design/0.5.10)
@@ -50,6 +56,7 @@ adapted from [marathonpacechart](http://marathonpacechart.com/)
 * [scrollTo](https://cdnjs.com/libraries/jquery-scrollTo/2.1.2)
 
 
-### Docs
+## Docs
+
 * [Panels](http://getbootstrap.com/components/#panels)
 * [Material Panel](http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html#container)
