@@ -8,7 +8,7 @@ $(document).ready(function() {
   //$.material.options.withRipples += ',.panel-heading.collapsible'
   
   // init mask
-  //$("#pace_min").mask("99:99")
+  //$("#pace_mile").mask("99:99")
   //$("#total_time").mask("9:99:99")
   //$("#bq_aqe").mask("99")
 
@@ -31,15 +31,17 @@ $(document).ready(function() {
     
     dataTable = InitDataTables()
   
-    $("#pace_min").change(function() {
+    $("#pace_mile").change(function() {
 
       var pace_span = this.value;
-      var pace_sec = DateMath.timespanToSeconds(pace_span);
-      var total_time = pace_sec * 26.2;
+      var pace_sec_mile = DateMath.timespanToSeconds(pace_span);
+      var total_time = pace_sec_mile * 26.2;
       var total_timespan = DateMath.secondsToTimeSpan(total_time)
-      
+      var pace_sec_km = total_time / 42.195;
+      var pace_span_km = DateMath.secondsToTimeSpan(pace_sec_km);
+
       // highlight errors
-      if (isNaN(pace_sec)) {
+      if (isNaN(pace_sec_mile)) {
         $(this).closest('.form-group').addClass('has-warning')
         return
       } else {
@@ -50,12 +52,43 @@ $(document).ready(function() {
       
       //merely setting val - won't trigger change
       $("#total_time").val(total_timespan)
+      $("#pace_km").val(pace_span_km)
+      
+      highlightAndScrollToRow(pace_sec_mile, updateScroll)
+      
+      BuildSlider(pace_sec_mile)
+      PaceStrategy.Build(pace_sec_mile, splitDeltaSec)
+      
+      
+    });
 
+    $("#pace_km").change(function() {
+
+      var pace_span = this.value;
+      var pace_sec_km = DateMath.timespanToSeconds(pace_span);
+      var total_time = pace_sec_km * 42.195;
+      var total_timespan = DateMath.secondsToTimeSpan(total_time)
+      var pace_sec_mi = total_time / 26.2;
+      var pace_span_mi = DateMath.secondsToTimeSpan(pace_sec_mi);
+
+      // highlight errors
+      if (isNaN(pace_sec_km)) {
+        $(this).closest('.form-group').addClass('has-warning')
+        return
+      } else {
+        $(this).closest('.form-group').removeClass('has-warning')
+      }
       
-      highlightAndScrollToRow(pace_sec, updateScroll)
       
-      BuildSlider(pace_sec)
-      PaceStrategy.Build(pace_sec, splitDeltaSec)
+      
+      //merely setting val - won't trigger change
+      $("#total_time").val(total_timespan)
+      $("#pace_mile").val(pace_span_mi)
+      
+      highlightAndScrollToRow(pace_sec_km, updateScroll)
+      
+      BuildSlider(pace_sec_km)
+      PaceStrategy.Build(pace_sec_km, splitDeltaSec)
       
       
     });
@@ -65,11 +98,13 @@ $(document).ready(function() {
       
       var total_timespan = this.value;
       var total_time = DateMath.timespanToSeconds(total_timespan);
-      var pace_sec = total_time / 26.2;
-      var pace_span = DateMath.secondsToTimeSpan(pace_sec)
-  
+      var pace_sec_mi = total_time / 26.2;
+      var pace_span_mi = DateMath.secondsToTimeSpan(pace_sec_mi)
+      var pace_sec_km = total_time / 42.195;
+      var pace_span_km = DateMath.secondsToTimeSpan(pace_sec_km)
+
       // highlight errors
-      if (isNaN(pace_sec)) {
+      if (isNaN(pace_sec_mi)) {
         $(this).closest('.form-group').addClass('has-warning')
         return
       } else {
@@ -77,13 +112,13 @@ $(document).ready(function() {
       }
   
       //merely setting val - won't trigger change
-      $("#pace_min").val(pace_span)
-
+      $("#pace_mile").val(pace_span_mi)
+      $("#pace_km").val(pace_span_km)
       
-      highlightAndScrollToRow(pace_sec, updateScroll)
+      highlightAndScrollToRow(pace_sec_mi, updateScroll)
   
-      BuildSlider(pace_sec)
-      PaceStrategy.Build(pace_sec, splitDeltaSec)
+      BuildSlider(pace_sec_mi)
+      PaceStrategy.Build(pace_sec_mi, splitDeltaSec)
       
     });
   
@@ -126,13 +161,13 @@ $(document).ready(function() {
       var pace_span = $(this).find("td:first").html();
       // feed into control
       updateScroll = false;
-      $("#pace_min").val(pace_span).trigger("change")
+      $("#pace_mile").val(pace_span).trigger("change")
       updateScroll = true;
     });
   
     // set init pace
     var pace_span = DateMath.secondsToTimeSpan(pace_sec)
-    $("#pace_min").val(pace_span).trigger("change")
+    $("#pace_mile").val(pace_span).trigger("change")
   }, 1000);
   
   
