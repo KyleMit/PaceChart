@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Server",
+            "type": "shell",
+            "command": "live-server --host=localhost --port=8055 --no-browser",
+
+        },
+        {
+            "label": "Publish Server",
+            "type": "shell",
+            "command": "ssh -R 80:localhost:8055 kylemit@ssh.localhost.run",
+        },
+        {
+            "label": "Launch Browser",
+            "type": "shell",
+            "command": "explorer 'https://kylemit.localhost.run'",
+        },
+        {
+            "label": "Run Public Server",
+            "group": {
+                "kind": "build",  // Ctrl + Shift + B
+                "isDefault": true
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "dependsOn": ["Run Server", "Publish Server", "Launch Browser"]
+        }
+
+
+        
+    ]
+}
