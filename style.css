@@ -149,3 +149,17 @@ table tbody tr:nth-child(even)  {
   background-color: #eee;
   color: rgba(0,0,0, 0.87);
 }
+
+del {
+  text-decoration: none;
+  position: relative;
+}
+del:before {
+  content: '';
+  border-top: 2px solid black;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44%;
+}
